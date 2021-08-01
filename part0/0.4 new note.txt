@@ -13,7 +13,7 @@ note over server:
 server sends a redirect response to the browser
 end note
 
-server-->browser: status code 302 redirect response
+server-->browser: 302 redirect
 
 note over browser:
 because of redirect to the notes page browser reloads the notes page which
