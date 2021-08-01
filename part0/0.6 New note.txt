@@ -1,0 +1,16 @@
+note over browser:
+browser makes a POST request
+to server address new_note_spa 
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+server adds the submitted note to the notes data structure
+end note
+
+note over server:
+server sends a code 201 created response to the browser
+end note
+
+server-->browser: 201 created
