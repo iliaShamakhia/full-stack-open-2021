@@ -1,29 +1,14 @@
 {
-  "persons":[
-    { 
-      "name": "Arto Hellas", 
-      "number": "040-123456",
-      "id": 1
-    },
-    { 
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    { 
-      "name": "Dan Abramov", 
-      "number": "12-43-234345",
+  "persons": [
+    {
+      "name": "ilia shamakhia",
+      "number": "597-74-78-17",
       "id": 3
     },
-    { 
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122",
+    {
+      "name": "johnson qubarua",
+      "number": "599-76-54-32",
       "id": 4
-    },
-    { 
-      "name": "Ilia Shamakhia", 
-      "number": "597-74-78-17",
-      "id": 5
     }
   ]
 }

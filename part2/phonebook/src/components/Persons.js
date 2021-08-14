@@ -1,10 +1,9 @@
 import React from 'react';
-import Person from './Person';
 
 const Persons=(props)=>{
     return(
         <div>
-            {props.persons.map((person,i)=><Person key={i} name={person.name} number={person.number}/>)}
+            {props.persons.map(person=><p key={person.id}>{person.name} {person.number}<button onClick={()=>props.handleDelete(person.name,person.id)}>delete</button></p>)}
         </div>
     );
 }
