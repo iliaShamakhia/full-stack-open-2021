@@ -14,21 +14,21 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [success,setSuccess]=useState(true);
   const personsToShow = showAll?persons:persons.filter(person=>person.name.toLowerCase().startsWith(filter));
-  let count;
+
   useEffect(()=>{
     PersonService.getAll().then(resp=>{
       setPersons(resp.data);
-      count=persons.length;
     })
   },[]);
+
   const handleAdd=(e)=>{
     e.preventDefault();
-    let a={name:newName,number:newNumber,id:count};
+    let a={name:newName,number:newNumber};
     let found=persons.find(elem=>elem.name===newName);
     if(found){
-      let personToUpd=persons.filter(elem=>elem.name===newName);
       if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
-        PersonService.update(personToUpd[0].id,a).then(resp=>setPersons(persons.map(person => person.id !== personToUpd[0].id ? person : resp.data)));
+        PersonService.update(found.id,a)
+        .then(resp=>setPersons(persons.map(person => person.id !== found.id ? person : resp.data)));
         setSuccess(true);
         setErrorMessage(`updated ${newName}`);
         setTimeout(() => {          
@@ -41,15 +41,24 @@ const App = () => {
       PersonService.create(a)    
       .then(response => {
         setPersons(persons.concat(response.data));
-        count++;    
+        setSuccess(true);
+        setErrorMessage(`Added ${newName}`);        
+        setTimeout(() => {          
+          setErrorMessage(null)        
+        }, 5000)
+        setNewName('');
+        setNewNumber('');   
       })
-      setSuccess(true);
-      setErrorMessage(`Added ${newName}`);        
-      setTimeout(() => {          
-        setErrorMessage(null)        
-      }, 5000)
-      setNewName('');
-      setNewNumber('');
+      .catch(error=>{
+        setSuccess(false);
+        setErrorMessage(error.response.data.error);        
+        setTimeout(() => {          
+          setErrorMessage(null)        
+        }, 5000)
+        setNewName('');
+        setNewNumber('');
+      });
+      
     }
   };
   const handleFilter=(e)=>{
@@ -72,8 +81,8 @@ const App = () => {
           setErrorMessage(null);
         }, 5000);
         setPersons(persons.filter(per=>per.id!==id));
-        count--;
-      }).catch(error => {
+      })
+      .catch(error => {
           setSuccess(false);
           setErrorMessage(`Information of '${name}' has already been removed from server`);
           setPersons(persons.filter(per=>per.id!==id));     
