@@ -30,3 +30,10 @@ body {
     padding: 10px;
     margin-bottom: 10px;
   }
+  .navBar {
+    display: flex;
+    background-color: gray;
+  }
+  .navBar p {
+    margin: 2px;
+  }
