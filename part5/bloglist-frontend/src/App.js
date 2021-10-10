@@ -23,6 +23,7 @@ import { setUser } from './reducers/usersReducer'
 import UserInfo from './components/UserInfo'
 import BlogInfo from './components/BlogInfo'
 import Blogs from './components/Blogs'
+import { Navbar, Nav, Button } from 'react-bootstrap'
 
 
 const App = () => {
@@ -138,18 +139,30 @@ const App = () => {
   if (user === null) {
     return (
       <div>
-        <Notification  success={success} message={errorMessage} />
         <LoginForm handleLogin={handleLogin} username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>
+        <Notification  success={success} message={errorMessage} />
       </div>
     )
   }else{
     return (
       <Router>
-        <div className='navBar'>
-          <p><Link  to="/blogs">blogs </Link></p>
-          <p><Link  to="/users"> users</Link></p>
-          <p>{user.name} Logged in <button id='logout-button' onClick={handleLogout}>logout</button></p>
-        </div>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto test">
+              <Nav.Link href="#" as="span">
+                <Link to="/blogs">blogs</Link>
+              </Nav.Link>
+              <Nav.Link href="#" as="span">
+                <Link to="/users">users</Link>
+              </Nav.Link>
+              <Nav.Link id='logged-in-user'href="#" as="span">
+                <p>{user.name} Logged in</p>
+              </Nav.Link>
+              <Button id='logout-button' variant='primary' onClick={handleLogout}>logout</Button>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
         <Header success={success} errorMessage={errorMessage} />
         <Switch>
           <Route path="/users/:id">
@@ -182,4 +195,10 @@ export default App
               {blogs.sort((a,b) => b.likes-a.likes).map((blog,i) =>
                 <Blog key={blog.id} blog={blog} i={i} handleLike={handleLike} handleRemove={handleRemove} user={user}/>
               )}
-            </div> */
+            </div>
+            <div className='navBar'>
+          <p><Link  to="/blogs">blogs </Link></p>
+          <p><Link  to="/users"> users</Link></p>
+          <p>{user.name} Logged in <button id='logout-button' onClick={handleLogout}>logout</button></p>
+        </div>
+            */

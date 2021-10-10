@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 
 const BlogForm =({ handleCreate }) => {
   const [title,setTitle]=useState('')
@@ -20,18 +21,37 @@ const BlogForm =({ handleCreate }) => {
   return(
     <div>
       <h2>create new</h2>
-      <form onSubmit={addBlog}>
-        <div>
-            title:<input id='title' type="text" value={title} name="Title" onChange={({ target }) => setTitle(target.value)}/>
-        </div>
-        <div>
-            author:<input id='author' type="text" value={author} name="Author" onChange={({ target }) => setAuthor(target.value)}/>
-        </div>
-        <div>
-            url:<input id='url' type="text" value={url} name="Url" onChange={({ target }) => setUrl(target.value)}/>
-        </div>
-        <button id='submit-blog-button' type="submit">create</button>
-      </form>
+      <Form onSubmit={addBlog}>
+        <Form.Group>
+          <Form.Label>title:</Form.Label>
+          <Form.Control
+            id="title"
+            type="text"
+            name="title"
+            value={title}
+            onChange={({ target }) => setTitle(target.value)}
+          />
+          <Form.Label>author:</Form.Label>
+          <Form.Control
+            id="author"
+            type="text"
+            name="author"
+            value={author}
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+          <Form.Label>url:</Form.Label>
+          <Form.Control
+            id="url"
+            type="text"
+            name="url"
+            value={url}
+            onChange={({ target }) => setUrl(target.value)}
+          />
+          <Button id="submit-blog-button" variant="primary" type="submit">
+            create
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   )
 }

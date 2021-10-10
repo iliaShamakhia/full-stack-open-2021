@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ListGroup, Form, Button } from 'react-bootstrap'
 
 const BlogInfo = ({ blogs, handleLike, handleComment }) => {
   const [comment, setComment] = useState('')
@@ -11,15 +12,27 @@ const BlogInfo = ({ blogs, handleLike, handleComment }) => {
   return(
     <div>
       <h2>{blog.title}</h2>
-      <p><a href={blog.url}>{blog.url}</a></p>
-      <p>{blog.likes} likes <button onClick={() => handleLike(blog)}>like</button></p>
-      <p>added by {blog.author}</p>
+      <p>by: {blog.author}</p>
+      <p>for more info visit: <a href={blog.url}>{blog.url}</a></p>
+      <p>likes: {blog.likes} <Button id='like-button' variant='primary' onClick={() => handleLike(blog)}>like</Button></p>
       <h4>comments</h4>
-      <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}></input>
-      <button onClick={() => {handleComment(comment,blog.id);setComment('')}}>add comment</button>
-      <ul>
-        {blog.comments?blog.comments.map((el,i) => <li key={i}>{el}</li>):null}
-      </ul>
+      <ListGroup variant='flush'>
+        {blog.comments?blog.comments.map((el,i) => <ListGroup.Item variant='secondary' key={i}>{el}</ListGroup.Item>):null}
+      </ListGroup>
+      <Form onSubmit={(e) => {e.preventDefault();handleComment(comment,blog.id);setComment('')}}>
+        <Form.Group>
+          <Form.Control
+            id="comment"
+            type="text"
+            name="comment"
+            value={comment}
+            onChange={({ target }) => setComment(target.value)}
+          />
+          <Button id="comment-button" variant="primary" type="submit">
+            add comment
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   )
 }

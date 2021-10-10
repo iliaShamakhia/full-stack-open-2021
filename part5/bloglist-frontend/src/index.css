@@ -11,29 +11,42 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-
-  .success {
-    color: green;
-    background: lightgrey;
-    font-size: 20px;
-    border-style: solid;
-    border-radius: 5px;
-    padding: 10px;
+  #login-text{
+    text-align: center;
+    margin: 5px;
+  }
+  #login-button{
+    margin-top: 10px;
+  }
+  #logout-button{
+    margin-left: 5px;
+    height:0%;
+  }
+  #logged-in-user{
+    color: white;
+  }
+  #create-blog-button{
     margin-bottom: 10px;
   }
-  .error {
-    color: red;
-    background: lightgrey;
-    font-size: 20px;
-    border-style: solid;
-    border-radius: 5px;
-    padding: 10px;
+  #submit-blog-button{
+    margin-top: 10px;
+  }
+  #cancel-button{
+    margin-top: 0;
     margin-bottom: 10px;
   }
-  .navBar {
-    display: flex;
-    background-color: gray;
+  #like-button{
+    height: 0%;
   }
-  .navBar p {
-    margin: 2px;
+  #comment{
+    margin-top: 10px;
+  }
+  #comment-button{
+    margin-top: 10px;
+  }
+  .test{
+    width: 100%;
+  }
+  #blog-app{
+    text-align: center;
   }

@@ -1,19 +1,21 @@
 import React from 'react'
+import { Alert } from 'react-bootstrap'
+
 const Notification = ({ success,message }) => {
   if (message === null) {
     return null
   }
   if(success){
     return (
-      <div className="success">
+      <Alert variant="success">
         {message}
-      </div>
+      </Alert>
     )
   }else{
     return(
-      <div className="error">
+      <Alert variant="danger">
         {message}
-      </div>
+      </Alert>
     )
   }
 }
