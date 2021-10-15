@@ -4,10 +4,10 @@ import blogService from './services/blogs'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import loginService from './services/login'
+import userService from './services/users'
 //import BlogForm from './components/BlogForm'
 //import Togglable from './components/Togglable'
 //
-import userService from './services/users'
 import {
   BrowserRouter as Router,
   Switch, Route, Link
@@ -38,6 +38,7 @@ const App = () => {
   const success = useSelector(state => state.success)
   const blogs = useSelector(state => state.blogs)
   const user = useSelector(state => state.user)
+
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -85,6 +86,25 @@ const App = () => {
     }
   }
 
+  const handleRegister = (name,username,password) => {
+    if(name===''||username===''||password===''){
+      dispatch(setFailure())
+      dispatch(setNotification('name, username & password must not be empty'))
+      setTimeout(() => {dispatch(removeNotification())}, 5000)
+      return
+    }
+    try{
+      userService.register(name,username,password)
+      dispatch(setSuccess())
+      dispatch(setNotification('Registration success'))
+      setTimeout(() => {dispatch(removeNotification())}, 5000)
+    }catch(e){
+      dispatch(setFailure())
+      dispatch(setNotification('Registration Failed'))
+      setTimeout(() => {dispatch(removeNotification())}, 5000)
+    }
+  }
+
   const handleLogout=() => {
     window.localStorage.clear()
     dispatch(setUser(null))
@@ -105,6 +125,7 @@ const App = () => {
       blogService.getAll().then(blogs =>
         dispatch(setBlogs( blogs ))
       )
+      userService.getUsers().then(res => setUsers(res))
       dispatch(setSuccess())
       dispatch(setNotification(`a new blog ${obj.title} by ${obj.author} added`))
       setTimeout(() => {dispatch(removeNotification())}, 5000)
@@ -126,6 +147,7 @@ const App = () => {
       blogService.getAll().then(blogs =>
         dispatch(setBlogs( blogs ))
       )
+      userService.getUsers().then(res => setUsers(res))
     }
   }
 
@@ -139,7 +161,7 @@ const App = () => {
   if (user === null) {
     return (
       <div>
-        <LoginForm handleLogin={handleLogin} username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>
+        <LoginForm handleLogin={handleLogin} handleRegister={handleRegister} username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>
         <Notification  success={success} message={errorMessage} />
       </div>
     )
@@ -169,7 +191,7 @@ const App = () => {
             <UserInfo users={users} />
           </Route>
           <Route path="/blogs/:id">
-            <BlogInfo blogs={blogs} handleLike={handleLike} handleComment={handleComment}/>
+            <BlogInfo blogs={blogs} handleLike={handleLike} handleComment={handleComment} handleRemove={handleRemove}/>
           </Route>
           <Route path='/blogs'>
             <Blogs blogFormRef={blogFormRef} handleCreate={handleCreate} blogs={blogs} handleLike={handleLike} handleRemove={handleRemove} user={user}/>

@@ -18,6 +18,14 @@ body {
   #login-button{
     margin-top: 10px;
   }
+  #register-user-button{
+    margin-top:10px;
+    margin-left: 10px;
+  }
+  #cancel-regist-button{
+    margin-top:10px;
+    margin-left: 10px;
+  }
   #logout-button{
     margin-left: 5px;
     height:0%;
