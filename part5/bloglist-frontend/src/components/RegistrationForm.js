@@ -11,7 +11,8 @@ const RegistrationForm = ({ handleRegister }) => {
   return(
     <div>
       <h2 id="login-text" >Register</h2>
-      <Form onSubmit={(e) => { e.preventDefault()
+      <Form onSubmit={(e) => {
+        e.preventDefault()
         handleRegister(name,username,password)
         history.push('/')
         setName('')

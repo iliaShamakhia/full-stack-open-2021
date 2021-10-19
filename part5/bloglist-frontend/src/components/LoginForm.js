@@ -36,11 +36,13 @@ const LoginForm =({ handleLogin,username,setUsername,password,setPassword,handle
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}
                 />
-                <Button id="login-button" variant="primary" type="submit">
-                  login
-                </Button>
-                <div style={{ marginTop:'10px' }}>
-                  <Link to="/register">register</Link>
+                <div id="login-register">
+                  <Button id="login-button" variant="primary" type="submit">
+                    login
+                  </Button>
+                  <div id='register-user-button'>
+                    <Link to="/register">register</Link>
+                  </div>
                 </div>
               </Form.Group>
             </Form>

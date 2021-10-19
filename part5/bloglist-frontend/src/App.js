@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-//import Blog from './components/Blog'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import loginService from './services/login'
 import userService from './services/users'
-//import BlogForm from './components/BlogForm'
-//import Togglable from './components/Togglable'
 //
 import {
   BrowserRouter as Router,
@@ -178,12 +175,10 @@ const App = () => {
               <Nav.Link href="#" as="span">
                 <Link to="/users">users</Link>
               </Nav.Link>
-              <Nav.Link id='logged-in-user'href="#" as="span">
-                <p>{user.name} Logged in</p>
-              </Nav.Link>
-              <Button id='logout-button' variant='primary' onClick={handleLogout}>logout</Button>
             </Nav>
           </Navbar.Collapse>
+          <p id='logged-in-user'>{user.name} Logged in </p>
+          <Button id='logout-button' variant='primary' onClick={handleLogout}>logout</Button>
         </Navbar>
         <Header success={success} errorMessage={errorMessage} />
         <Switch>
@@ -191,7 +186,7 @@ const App = () => {
             <UserInfo users={users} />
           </Route>
           <Route path="/blogs/:id">
-            <BlogInfo blogs={blogs} handleLike={handleLike} handleComment={handleComment} handleRemove={handleRemove}/>
+            <BlogInfo blogs={blogs} user={user} handleLike={handleLike} handleComment={handleComment} handleRemove={handleRemove}/>
           </Route>
           <Route path='/blogs'>
             <Blogs blogFormRef={blogFormRef} handleCreate={handleCreate} blogs={blogs} handleLike={handleLike} handleRemove={handleRemove} user={user}/>
@@ -209,18 +204,3 @@ const App = () => {
 }
 
 export default App
-
-/*<div className='blogs'>
-              <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-                <BlogForm handleCreate={handleCreate}/>
-              </Togglable>
-              {blogs.sort((a,b) => b.likes-a.likes).map((blog,i) =>
-                <Blog key={blog.id} blog={blog} i={i} handleLike={handleLike} handleRemove={handleRemove} user={user}/>
-              )}
-            </div>
-            <div className='navBar'>
-          <p><Link  to="/blogs">blogs </Link></p>
-          <p><Link  to="/users"> users</Link></p>
-          <p>{user.name} Logged in <button id='logout-button' onClick={handleLogout}>logout</button></p>
-        </div>
-            */

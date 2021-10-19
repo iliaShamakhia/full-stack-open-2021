@@ -18,9 +18,14 @@ body {
   #login-button{
     margin-top: 10px;
   }
+  #login-register{
+    display:flex;
+  }
   #register-user-button{
-    margin-top:10px;
-    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    margin:10px;
   }
   #cancel-regist-button{
     margin-top:10px;
@@ -32,6 +37,7 @@ body {
   }
   #logged-in-user{
     color: white;
+    margin-top: 15px;
   }
   #create-blog-button{
     margin-bottom: 10px;
