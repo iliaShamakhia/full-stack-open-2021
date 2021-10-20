@@ -1,5 +1,5 @@
 {
-  "name": "library",
+  "name": "library-backend",
   "version": "1.0.0",
   "description": "FSO part 8 exercises GraphQL library backend",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.4.0",
-    "graphql": "^15.6.1"
+    "graphql": "^15.6.1",
+    "uuid": "^8.3.2"
   }
 }
