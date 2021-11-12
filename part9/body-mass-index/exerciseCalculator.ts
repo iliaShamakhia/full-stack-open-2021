@@ -8,13 +8,13 @@ interface Result {
     ratingDescription: string;
   }
 
-const calculateExercises = (hours: Array<number>, target: number): Result => {
-    let trainingDays: number = hours.filter(h => h > 0).length;
-    let average: number = hours.reduce((p,c) => p += c)/hours.length;
-    let success: boolean = average >= target;
+export const calculateExercises = (hours: Array<number>, target: number): Result => {
+    const trainingDays: number = hours.filter(h => h > 0).length;
+    const average: number = hours.reduce((p,c) => p += c)/hours.length;
+    const success: boolean = average >= target;
     let rating: number;
     let ratingDescription: string;
-    let total: number = average - target;
+    const total: number = average - target;
     if(total >= 0){
         rating = 3;
         ratingDescription = "Good Job! Keep exercising";
@@ -23,7 +23,7 @@ const calculateExercises = (hours: Array<number>, target: number): Result => {
         ratingDescription = "not too bad but could be better";
     }else{
         rating = 1;
-        ratingDescription = "Bro, put your stuff together"
+        ratingDescription = "bad";
     }
     return {
         periodLength: hours.length,
@@ -34,8 +34,8 @@ const calculateExercises = (hours: Array<number>, target: number): Result => {
         rating,
         ratingDescription
     };
-}
+};
 
-const t: number = Number(process.argv[2]);
-const hr: Array<number> = [...process.argv].slice(3).map(el => Number(el));
-console.log(calculateExercises(hr,t));
+//const t = Number(process.argv[2]);
+//const hr: Array<number> = [...process.argv].slice(3).map(el => Number(el));
+//console.log(calculateExercises(hr,t));
