@@ -1,4 +1,6 @@
-[
+import { Diagnosis } from "../src/types";
+
+const diagnoseEntries: Array<Diagnosis> = [
     {
       "code": "M24.2",
       "name": "Disorder of ligament",
@@ -75,9 +77,7 @@
       "code": "H35.29",
       "name": "Other proliferative retinopathy",
       "latin": "Alia retinopathia proliferativa"
-    },
-    {
-      "code": "J12.82",
-      "name": "Pneumonia due to coronavirus disease"
     }
-  ]
+  ];
+  
+  export default diagnoseEntries;
