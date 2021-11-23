@@ -63,3 +63,13 @@ export interface Patient {
 }
 
 export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >;
+
+export interface EntryForm extends BaseEntry {
+  type: string;
+  healthCheckRating?: HealthCheckRating;
+  dischargeDate?: string;
+  dischargeCriteria?: string;
+  employerName?: string;
+  sickLeaveStartDate?: string;
+  sickLeaveEndDate?: string;
+}
